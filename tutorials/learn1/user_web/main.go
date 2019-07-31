@@ -1,9 +1,11 @@
 package main
 
 import (
+	mc "github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/registry"
 	"github.com/micro/go-micro/util/log"
 	"github.com/micro/go-plugins/registry/etcdv3"
+	"micro_learn/tutorials/learn1/user_web/client"
 	"net/http"
 
 	"github.com/micro/go-micro/web"
@@ -16,6 +18,8 @@ func main() {
 	reg := etcdv3.NewRegistry(func(op *registry.Options){
 		op.Addrs = []string{"127.0.0.1:2379"}
 	})
+
+	client.Init(mc.Registry(reg))
 
 	// create new web service
 	service := web.NewService(

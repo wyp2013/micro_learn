@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/registry"
+	"github.com/micro/go-micro/server/grpc"
 	"github.com/micro/go-micro/util/log"
 	"github.com/micro/go-plugins/registry/etcdv3"
 	"micro_learn/tutorials/learn1/user_server/basic"
@@ -23,6 +24,7 @@ func main() {
 
 	// New Service
 	service := micro.NewService(
+		micro.Server(grpc.NewServer()),
 		micro.Name("smtl.micro.learn.srv.user"),
 		micro.Version("latest"),
 		micro.Registry(reg),
@@ -38,4 +40,6 @@ func main() {
 	if err := service.Run(); err != nil {
 		log.Fatal(err)
 	}
+
+
 }

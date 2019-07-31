@@ -3,10 +3,10 @@ package handler
 import (
 	"context"
 	"encoding/json"
+	"micro_learn/tutorials/learn1/user_web/client"
 	"net/http"
 	"time"
 
-	"github.com/micro/go-micro/client"
 	user "micro_learn/tutorials/learn1/user_server/proto/user"
 )
 
@@ -20,7 +20,7 @@ func UserLogIn(w http.ResponseWriter, r *http.Request) {
 	userName := r.Form.Get("userName")
 
 	// call the backend service
-	userClient := user.NewUserService("smtl.micro.learn.srv.user", client.DefaultClient)
+	userClient := client.GetUserService()
 	rsp, err := userClient.QueryUserByName(context.TODO(), &user.Request{
 		UserName: userName,
 	})
