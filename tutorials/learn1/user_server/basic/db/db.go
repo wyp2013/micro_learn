@@ -1,0 +1,50 @@
+package db
+
+import (
+	"fmt"
+	"github.com/go-xorm/xorm"
+	"micro_learn/tutorials/learn1/user_server/basic/config"
+	"micro_learn/tutorials/utils"
+	"path/filepath"
+)
+
+var engine *xorm.Engine
+
+func getDefaultLogPath() string {
+	appPath, _ := filepath.Abs(filepath.Dir("./"))
+	logPath := filepath.Join(appPath, "/log/xrom.log")
+
+	return logPath
+}
+
+func Init(xormLogPath string) {
+	sqlConf := config.GetMysqlConf()
+	if sqlConf == nil {
+		panic("mysql 配置为空")
+	}
+
+	if len(xormLogPath) == 0 {
+		xormLogPath = getDefaultLogPath()
+	}
+
+	fmt.Println(xormLogPath)
+
+	var err error
+	engine, err = utils.InitDb(sqlConf.URL, xormLogPath)
+	if err != nil {
+		panic(err.Error())
+	}
+
+	engine.SetMaxOpenConns(sqlConf.MaxOpenConnection)
+	engine.SetMaxIdleConns(sqlConf.MaxIdleConnection)
+}
+
+func GetDbEngine() *xorm.Engine {
+	if engine == nil {
+		panic("mysql is not initial")
+	}
+
+	return engine
+}
+
+
