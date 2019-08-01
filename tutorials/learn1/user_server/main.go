@@ -22,7 +22,7 @@ func main() {
 	})
 
 
-	// New Service
+	// New Service, use grpc as server
 	service := micro.NewService(
 		micro.Server(grpc.NewServer()),
 		micro.Name("smtl.micro.learn.srv.user"),

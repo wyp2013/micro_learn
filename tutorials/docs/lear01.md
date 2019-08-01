@@ -181,4 +181,28 @@ curl --request POST   --url http://127.0.0.1:54469/user/login   --header 'Conten
 {"data":{"id":10001,"name":"micro","createdTime":1564470621,"updatedTime":1564470621},"ref":1564558145349977000,"success":true}
 ```
 
+### micro命令 支持etcdv3
+直接go get下来的micro命令不支持etcdv3
+```
+micro --registry=etcdv3 call smtl.micro.learn.srv.user User.QueryUserByName '{"userName":"micro"}'
+命令一直不运行，原因是micro默认不支持etcdv3，需要手动重新编译
 
+```
+#### 步骤
+- 进入micro项目目录，建立一个plugin.go 
+```
+package main
+
+import (
+	_ "github.com/micro/go-plugins/registry/etcdv3"
+)
+
+```
+- 然后重新编译
+```
+go build  -o micro main.go plugin.go
+```
+- 拷贝到GOPATH/BIN下
+```
+copy micro $GOAPTH/bin
+```

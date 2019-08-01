@@ -1,0 +1,3 @@
+[xorm] [info]  2019/08/01 17:19:20.570452 New Enging Ok
+[xorm] [info]  2019/08/01 17:19:20.570522 PING DATABASE mysql
+[xorm] [error] 2019/08/01 17:19:20.575570 Error 1045: Access denied for user ''@'localhost' (using password: NO)

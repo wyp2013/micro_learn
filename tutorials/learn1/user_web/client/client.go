@@ -9,6 +9,7 @@ import (
 
 var userService user.UserService
 
+// 本列子使用grpc通信
 func Init(opts ...client.Option) {
 	rpcClient := grpc.NewClient(opts...)
 	userService = user.NewUserService("smtl.micro.learn.srv.user", rpcClient)
