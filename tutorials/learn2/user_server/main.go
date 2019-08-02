@@ -1,6 +1,9 @@
 package main
 
 import (
+	"flag"
+	"fmt"
+	"github.com/micro/cli"
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/registry"
 	"github.com/micro/go-micro/util/log"
@@ -8,17 +11,18 @@ import (
 	"micro_learn/tutorials/learn2/basic"
 	"micro_learn/tutorials/learn2/user_server/handler"
 	user "micro_learn/tutorials/learn2/user_server/proto/user"
+	"os"
 )
 
 func main() {
-	//flagSet := flag.NewFlagSet("config-load", flag.ExitOnError)
-	//confPath := flagSet.String("conf", "", "conf")
-	//logPath := flagSet.String("log", "", "log")
-	//flagSet.Parse(os.Args[1:])
-	//fmt.Println(*confPath, *logPath)
+	flagSet := flag.NewFlagSet("config-load", flag.ExitOnError)
+	confPath := flagSet.String("conf", "", "conf")
+	logPath := flagSet.String("log", "", "log")
+	flagSet.Parse(os.Args[1:])
+	fmt.Println(*confPath, *logPath)
 
 	// init mysql
-	basic.Init("./config/config.yaml", "./../log/xorm")
+	basic.Init(*confPath, *logPath)
 
 	// register
 	etcdEndpoints := basic.GetEtdcConfig()
@@ -32,6 +36,18 @@ func main() {
 		micro.Version("latest"),
 		micro.Registry(reg),
 		micro.Address(":58090"),
+		micro.Flags(
+			cli.StringFlag{
+				Name:   "conf",
+				EnvVar: "./config/config.yaml",
+				Usage:  "This is a config paht flag",
+			},
+			cli.StringFlag{
+				Name:   "log",
+				EnvVar: "./../log/xorm",
+				Usage:  "This is a log path flag",
+			},
+		),
 	)
 
 	// Initialise service
@@ -44,5 +60,4 @@ func main() {
 	if err := service.Run(); err != nil {
 		log.Fatal(err)
 	}
-
 }
