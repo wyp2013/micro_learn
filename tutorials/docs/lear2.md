@@ -27,7 +27,8 @@ go run main.go
 ```
 启动user-server
 ```
-go run main.go
+go run main.go --conf ./config/config.yaml --log ./../log/xorm
+
 # 启动成功信息
 019-07-31 15:27:44.497173 I | Transport [http] Listening on [::]:56538
 2019-07-31 15:27:44.497324 I | Broker [http] Connected to [::]:56540
