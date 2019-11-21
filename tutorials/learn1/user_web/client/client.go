@@ -1,8 +1,8 @@
 package client
 
 import (
-	"github.com/micro/go-micro/client"
-	"github.com/micro/go-micro/client/grpc"
+	"micro_learn/micro/go-micro/client"
+	"micro_learn/micro/go-micro/client/grpc"
 	user "micro_learn/tutorials/learn1/user_server/proto/user"
 
 )

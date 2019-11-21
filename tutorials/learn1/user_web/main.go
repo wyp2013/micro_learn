@@ -1,14 +1,14 @@
 package main
 
 import (
-	mc "github.com/micro/go-micro/client"
-	"github.com/micro/go-micro/registry"
-	"github.com/micro/go-micro/util/log"
-	"github.com/micro/go-plugins/registry/etcdv3"
+	mc "micro_learn/micro/go-micro/client"
+	"micro_learn/micro/go-micro/registry"
+	"micro_learn/micro/go-micro/util/log"
+	"micro_learn/micro/go-plugins/registry/etcdv3"
 	"micro_learn/tutorials/learn1/user_web/client"
 	"net/http"
 
-	"github.com/micro/go-micro/web"
+	"micro_learn/micro/go-micro/web"
 	"micro_learn/tutorials/learn1/user_web/handler"
 )
 

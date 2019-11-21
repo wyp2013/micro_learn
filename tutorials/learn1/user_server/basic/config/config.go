@@ -3,8 +3,8 @@ package config
 import (
 	"fmt"
 	"github.com/jinzhu/configor"
-	"github.com/micro/go-micro/config"
-	"github.com/micro/go-micro/config/source/file"
+	"micro_learn/micro/go-micro/config"
+	"micro_learn/micro/go-micro/config/source/file"
 	"os"
 	"path/filepath"
 	"strings"

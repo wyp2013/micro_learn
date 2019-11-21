@@ -1,14 +1,15 @@
 package main
 
 import (
-	"github.com/micro/go-micro"
-	"github.com/micro/go-micro/registry"
-	"github.com/micro/go-micro/server/grpc"
-	"github.com/micro/go-micro/util/log"
-	"github.com/micro/go-plugins/registry/etcdv3"
+	"micro_learn/micro/go-micro"
+	"micro_learn/micro/go-micro/registry"
+	"micro_learn/micro/go-micro/server/grpc"
+	"micro_learn/micro/go-micro/util/log"
+	"micro_learn/micro/go-plugins/registry/etcdv3"
 	"micro_learn/tutorials/learn1/user_server/basic"
 	"micro_learn/tutorials/learn1/user_server/handler"
 	user "micro_learn/tutorials/learn1/user_server/proto/user"
+	"time"
 )
 
 func main() {
@@ -28,6 +29,8 @@ func main() {
 		micro.Name("smtl.micro.learn.srv.user"),
 		micro.Version("latest"),
 		micro.Registry(reg),
+		micro.Address(":2990"),
+		micro.RegisterInterval(10*time.Second),
 	)
 
 	// Initialise service
